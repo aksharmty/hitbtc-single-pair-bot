@@ -28,10 +28,9 @@ echo "price P+p "; echo $sellprice; echo "<br>";
 
 ?>
 <?php
-
 $date = Date("Y-m-d H:i:s");
 $chbal = curl_init('https://api.hitbtc.com/api/2/trading/balance'); 
- curl_setopt($chbal, CURLOPT_USERPWD, 'YOUR_API_KEY:YOUR_SECRET_KEY'); // API AND KEY
+ curl_setopt($chbal, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
  curl_setopt($chbal, CURLOPT_RETURNTRANSFER,1);
  curl_setopt($chbal, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 curl_setopt($chbal, CURLOPT_HTTPHEADER, array('accept: application/json'));
@@ -53,25 +52,25 @@ $sqlbal= mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM balance whe
 $available=$sqlbal['available'];
 echo "BTC Bal ", $available ;
 
-$sqlbal= mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM trade1 order by id desc"));
+$sqlbal= mysqli_fetch_array(mysqli_query($connection, "SELECT * FROM trade1 ORDER BY id DESC LIMIT 1"));
+$idu=$sqlbal['id'];
 $lastbal=$sqlbal['clientOrderId'];
 $noorder=$sqlbal['wait'];
 $noorder1=$noorder+1;
 echo "BTC last Bal ", $lastbal ;
+echo "<br> NO ORDER VALUE" ; echo  $noorder;
 if ($available > $lastbal)
 { 
     if ($askp51 < 0.0241)
     {
-        echo buy ; echo "<br>";
+        echo "buy normal"  ; echo "<br>";
 //insert data
-$query = mysqli_query($connection,"INSERT INTO trade1(clientOrderId) VALUES ('$available')");
+$query = mysqli_query($connection,"INSERT INTO trade1(clientOrderId,wait) VALUES ('$available','0')");
 //order code
 $symbol = "ETHBTC";
 $side = "buy";
 $type = "limit";
 $price= "$askp51";
-//$price=$bid;
-//$quantity=$quantity2;
 $quantity="0.0013";
 $timeInForce= "GTC"; 
 $date = Date("Y-m-d H:i:s");
@@ -79,7 +78,7 @@ $date = Date("Y-m-d H:i:s");
 $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch, CURLOPT_USERPWD, 'YOUR_API_KEY:YOUR_SECRET_KEY'); // API AND KEY 
+curl_setopt($ch, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch, CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,"symbol=$symbol&side=$side&price=$price&quantity=$quantity&type=$type&timeInForce=$timeInForce");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -93,13 +92,10 @@ curl_close($ch);
 $result=json_decode($result);
 echo"<pre>";
 print_r($result);
-//order end
+//order buy end
 
-?>
-//insert order details
+//start sell order
 
-//sell order
-<?php
 $symbol1   = "ETHBTC";
 $side1= "sell";
 $type1= "limit";
@@ -110,7 +106,7 @@ $timeInForce1= "GTC"; // GET EMAIL INTO VAR
 $ch1 = curl_init();
 //do a post
 curl_setopt($ch1,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1, CURLOPT_USERPWD, 'YOUR_API_KEY:YOUR_SECRET_KEY'); // API AND KEY 
+curl_setopt($ch1, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch1, CURLOPT_POST,1);
 curl_setopt($ch1,CURLOPT_POSTFIELDS,"symbol=$symbol1&side=$side1&price=$price1&quantity=$quantity1&type=$type1&timeInForce=$timeInForce1");
 curl_setopt($ch1, CURLOPT_RETURNTRANSFER,1);
@@ -127,28 +123,22 @@ print_r($result1);
 else { echo "sorry price is high"; }
     
 } else { echo "wait" ;
-$querynoorder = mysqli_query($connection,"update trade1 set wait ='$noorder1' order by id desc limit 1");}
+$querynoorder = mysqli_query($connection,"update trade1 set wait ='$noorder1' where id='$idu'");}
 ?>
 //no order more then 15
 <?php
-$sql = "SELECT wait FROM trade1 where wait > 6";
-$result = $connection->query($sql);
 
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
+if ($noorder > 10) {
             if ($askp51 < 0.0241)
     {
-        echo buy ; echo "<br>";
+        echo "buy no order" ; echo "<br>";
 //insert data
-$query = mysqli_query($connection,"INSERT INTO trade1(clientOrderId) VALUES ('$available')");
+$queryno = mysqli_query($connection,"INSERT INTO trade1(clientOrderId,wait) VALUES ('$available','0')");
 //order code
 $symbol = "ETHBTC";
 $side = "buy";
 $type = "limit";
 $price= "$askp51";
-//$price=$bid;
-//$quantity=$quantity2;
 $quantity="0.0013";
 $timeInForce= "GTC"; 
 $date = Date("Y-m-d H:i:s");
@@ -156,7 +146,7 @@ $date = Date("Y-m-d H:i:s");
 $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch, CURLOPT_USERPWD, 'YOUR_API_KEY:YOUR_SECRET_KEY'); // API AND KEY 
+curl_setopt($ch, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch, CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,"symbol=$symbol&side=$side&price=$price&quantity=$quantity&type=$type&timeInForce=$timeInForce");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -172,22 +162,21 @@ echo"<pre>";
 print_r($result);
 //order end
 
-?>
+
 //insert order details
 
 //sell order
-<?php
+
 $symbol1   = "ETHBTC";
 $side1= "sell";
 $type1= "limit";
-$price1=$sellprice;
 $quantity1="0.0013";
 $timeInForce1= "GTC"; // GET EMAIL INTO VAR
 
 $ch1 = curl_init();
 //do a post
 curl_setopt($ch1,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1, CURLOPT_USERPWD, 'YOUR_API_KEY:YOUR_SECRET_KEY'); // API AND KEY 
+curl_setopt($ch1, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch1, CURLOPT_POST,1);
 curl_setopt($ch1,CURLOPT_POSTFIELDS,"symbol=$symbol1&side=$side1&price=$price1&quantity=$quantity1&type=$type1&timeInForce=$timeInForce1");
 curl_setopt($ch1, CURLOPT_RETURNTRANSFER,1);
@@ -203,7 +192,7 @@ print_r($result1);
 }
 else { echo "sorry price is high"; }
     }
-} else {
+ else {
     echo "0 results";
 }
 ?>
