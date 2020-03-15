@@ -125,7 +125,7 @@ else { echo "sorry price is high"; }
 } else { echo "wait" ;
 $querynoorder = mysqli_query($connection,"update trade1 set wait ='$noorder1' where id='$idu'");}
 ?>
-//no order more then 15
+//no order count 10
 <?php
 
 if ($noorder > 10) {
@@ -170,6 +170,7 @@ print_r($result);
 $symbol1   = "ETHBTC";
 $side1= "sell";
 $type1= "limit";
+$price1 = "$sellprice";
 $quantity1="0.0013";
 $timeInForce1= "GTC"; // GET EMAIL INTO VAR
 
