@@ -131,7 +131,7 @@ $querynoorder = mysqli_query($connection,"update trade1 set wait ='$noorder1' or
 ?>
 //no order more then 15
 <?php
-$sql = "SELECT wait FROM trad1 where wait > 15";
+$sql = "SELECT wait FROM trade1 where wait > 6";
 $result = $connection->query($sql);
 
 if ($result->num_rows > 0) {
@@ -206,3 +206,4 @@ else { echo "sorry price is high"; }
 } else {
     echo "0 results";
 }
+?>
