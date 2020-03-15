@@ -266,6 +266,7 @@ CREATE TABLE `trade1` (
   `quantity1` varchar(225) NOT NULL,
   `quantity2` varchar(225) NOT NULL,
   `clientOrderId` varchar(225) NOT NULL,
+  'wait' varchar (50) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
