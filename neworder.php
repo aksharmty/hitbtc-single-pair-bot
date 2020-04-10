@@ -18,7 +18,7 @@ $sell=$ask*0.31/100;
 $sell1=number_format($sell,11);
 $sellp=$ask+$sell1;
 $sellprice=number_format($sellp,11);
-$amount="200";
+$amount="210";
 
 echo "5+ detailts:<br>";
 echo "ask"; echo $ask; echo"<br>"; 
@@ -29,7 +29,7 @@ echo "price P+p "; echo $sellprice; echo "<br>";
 <?php
 $date = Date("Y-m-d H:i:s");
 $chbal = curl_init('https://api.hitbtc.com/api/2/trading/balance'); 
- curl_setopt($chbal, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
+ curl_setopt($chbal, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
  curl_setopt($chbal, CURLOPT_RETURNTRANSFER,1);
  curl_setopt($chbal, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 curl_setopt($chbal, CURLOPT_HTTPHEADER, array('accept: application/json'));
@@ -86,7 +86,7 @@ $date = Date("Y-m-d H:i:s");
 $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
+curl_setopt($ch, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch, CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,"symbol=$symbol&side=$side&price=$price&quantity=$quantity&type=$type&timeInForce=$timeInForce");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -114,7 +114,7 @@ $timeInForce1= "GTC"; // GET EMAIL INTO VAR
 $ch1 = curl_init();
 //do a post
 curl_setopt($ch1,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
+curl_setopt($ch1, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch1, CURLOPT_POST,1);
 curl_setopt($ch1,CURLOPT_POSTFIELDS,"symbol=$symbol1&side=$side1&price=$price1&quantity=$quantity1&type=$type1&timeInForce=$timeInForce1");
 curl_setopt($ch1, CURLOPT_RETURNTRANSFER,1);
@@ -154,7 +154,7 @@ $date = Date("Y-m-d H:i:s");
 $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
+curl_setopt($ch, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch, CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,"symbol=$symbol&side=$side&price=$price&quantity=$quantity&type=$type&timeInForce=$timeInForce");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -167,37 +167,7 @@ $result=curl_exec($ch);
 curl_close($ch);
 $result=json_decode($result);
 echo"<pre>";
-print_r($result);
-//order end
-
-
-//waiting sell order start
-
-//sell order
-
-$symbol1   = "DOGEBTC";
-$side1= "sell";
-$type1= "limit";
-$price1= "$sellprice";
-$quantity1="$amount";
-$timeInForce1= "GTC"; // GET EMAIL INTO VAR
-
-$ch1 = curl_init();
-//do a post
-//curl_setopt($ch1,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
-curl_setopt($ch1, CURLOPT_POST,1);
-curl_setopt($ch1,CURLOPT_POSTFIELDS,"symbol=$symbol1&side=$side1&price=$price1&quantity=$quantity1&type=$type1&timeInForce=$timeInForce1");
-curl_setopt($ch1, CURLOPT_RETURNTRANSFER,1);
-  //return the result of curl_exec,instead
-  //of outputting it directly
-curl_setopt($ch1, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-curl_setopt($ch1, CURLOPT_HTTPHEADER, array('accept: application/json'));
-$result1=curl_exec($ch1);
-curl_close($ch1);
-$result1=json_decode($result1);
-echo"<pre>";
-print_r($result1);
+print_r($result) ;
 }
 else { echo "sorry price is high"; }
     }
@@ -206,7 +176,7 @@ else { echo "sorry price is high"; }
     //sell balance update start
 $date = Date("Y-m-d H:i:s");
 $chbal1 = curl_init('https://api.hitbtc.com/api/2/trading/balance'); 
- curl_setopt($chbal1, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
+ curl_setopt($chbal1, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
  curl_setopt($chbal1, CURLOPT_RETURNTRANSFER,1);
  curl_setopt($chbal1, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 curl_setopt($chbal1, CURLOPT_HTTPHEADER, array('accept: application/json'));
@@ -227,10 +197,8 @@ foreach ($data1 as $key1 => $value) {//Extract the Array Values by using Foreach
 	$sqlbal1sell = "SELECT * FROM balance where currency='DOGE' AND available >= '$amount' ";
 $result123sell = $connection->query($sqlbal1sell);
 if ($result123sell->num_rows > 0) {
-    // output data of each row
-    while($rowsell = $result123sell->fetch_assoc()) {
       //buynor code start
-      $sellnormal = "SELECT * FROM trade1 where type='2'";
+      $sellnormal = "SELECT * FROM trade1 where type='2' order by id desc limit 1";
 $resultsellnormal = $connection->query($sellnormal);
 if ($resultsellnormal->num_rows > 0) 
     { echo "buy normal high"; echo $bnorprice;
@@ -246,7 +214,7 @@ $timeInForcesell= "GTC";
 $ch1s = curl_init();
 //do a post
 curl_setopt($ch1s,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1s, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
+curl_setopt($ch1s, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch1s, CURLOPT_POST,1);
 curl_setopt($ch1s,CURLOPT_POSTFIELDS,"symbol=$symbolsell&side=$sidesell&price=$pricesell&quantity=$quantitysell&type=$typesell&timeInForce=$timeInForcesell");
 curl_setopt($ch1s, CURLOPT_RETURNTRANSFER,1);
@@ -262,26 +230,16 @@ echo"<pre>";
 print_r($resultsell); 
 
 //order end
-
 //update trade table
-
-$sqlupd = "SELECT * FROM balance where currency='DOGE' AND available >= '$amount' ";
-$resultupd = $connection->query($sqlupd);
-if ($resultupd->num_rows > 0) {
-    // output data of each row
-    while($rowupd = $resultupd->fetch_assoc()) {
-    //$sql3 ="UPDATE trade1 SET quantity1='0', quantity2='$amount',type='1' WHERE id='$idu' ";
-       
-        $sql3 ="UPDATE trade1 SET quantity1='0', quantity2='$amount',type='3' WHERE type='2' order by id desc ";
+$sql3 ="UPDATE trade1 SET quantity1='0', quantity2='$amount',type='3' WHERE type='2' order by id desc limit 1";
 if ($connection->query($sql3) === TRUE) {
     echo "buy nor record updated successfully";
 } else {
-    echo "Error: " . $sql3 . "<br>" . $connection->error;
-} }
+    echo " Buy nor not found ";
+} 
 // buy nor sell end
     
 }else { echo "tup high"; echo $tupprice;
-    echo "id: " . $rowsell["id"]. " - Name: " . $rowsell["currency"]. " -available " . $rowsell["available"]." -reserved" .$rowsell["reserved"]. "<br>";
 //order on
 $symbolsell = "DOGEBTC";
 $sidesell = "sell";
@@ -293,7 +251,7 @@ $timeInForcesell= "GTC";
 $ch1s = curl_init();
 //do a post
 curl_setopt($ch1s,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1s, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
+curl_setopt($ch1s, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
 curl_setopt($ch1s, CURLOPT_POST,1);
 curl_setopt($ch1s,CURLOPT_POSTFIELDS,"symbol=$symbolsell&side=$sidesell&price=$pricesell&quantity=$quantitysell&type=$typesell&timeInForce=$timeInForcesell");
 curl_setopt($ch1s, CURLOPT_RETURNTRANSFER,1);
@@ -316,31 +274,22 @@ $sqlupd = "SELECT * FROM balance where currency='DOGE' AND available >= '$amount
 $resultupd = $connection->query($sqlupd);
 if ($resultupd->num_rows > 0) {
     // output data of each row
-    while($rowupd = $resultupd->fetch_assoc()) {
-    //$sql3 ="UPDATE trade1 SET quantity1='0', quantity2='$amount',type='1' WHERE id='$idu' ";
-       
-        $sql3 ="UPDATE trade1 SET quantity1='0', quantity2='$amount',type='1' WHERE type='0' order by price desc ";
+    $sql3 ="UPDATE trade1 SET quantity1='0', quantity2='$amount',type='1' WHERE type='0' order by price desc limit 1 ";
 if ($connection->query($sql3) === TRUE) {
     echo "tup sell record updated successfully";
 } else {
-    echo "Error: " . $sql3 . "<br>" . $connection->error;
+    echo "tup sell not found " ;
 }
-}}
 // buynor code end
-        
-       
-//end
-    }
+    
 } else {
     echo "0 ETHBTC sell order place doge balance low";
 }
 //end
-
-
-    }
+  }
 } else {
     echo "0 ETH balance low";
 }
 // trade table update end
 }
-?>
+?> 
