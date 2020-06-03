@@ -16,7 +16,7 @@ echo "amt", $amount; echo "amt -1 :", $amount1;
 <?php
 //btc balance start
 $chbal = curl_init('https://api.hitbtc.com/api/2/trading/balance'); 
- curl_setopt($chbal, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
+ curl_setopt($chbal, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
  curl_setopt($chbal, CURLOPT_RETURNTRANSFER,1);
  curl_setopt($chbal, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 curl_setopt($chbal, CURLOPT_HTTPHEADER, array('accept: application/json'));
@@ -78,7 +78,7 @@ $timeInForce= "GTC"; // GET EMAIL INTO VAR
 $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
+curl_setopt($ch, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
 curl_setopt($ch, CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,"symbol=$symbol&side=$side&price=$price&quantity=$quantity&type=$type&timeInForce=$timeInForce");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -126,7 +126,7 @@ $date = Date("Y-m-d H:i:s");
 $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY 
+curl_setopt($ch, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY 
 curl_setopt($ch, CURLOPT_POST,1);
 curl_setopt($ch,CURLOPT_POSTFIELDS,"symbol=$symbol&side=$side&price=$price&quantity=$quantity&type=$type&timeInForce=$timeInForce");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
