@@ -12,7 +12,7 @@ $sid=$rowptr['id']; $spri=$rowptr['clientOrderId'];
                $av=$clid['clientOrderId'];
                //echo  "avg ", $av;
 $cht = curl_init("https://api.hitbtc.com/api/2/history/order?symbol=DOGEBTC&clientOrderId=$av"); 
- curl_setopt($cht, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
+ curl_setopt($cht, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
  curl_setopt($cht, CURLOPT_RETURNTRANSFER,1);
  curl_setopt($cht, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 curl_setopt($cht, CURLOPT_HTTPHEADER, array('accept: application/json'));
@@ -34,7 +34,7 @@ curl_setopt($cht, CURLOPT_HTTPHEADER, array('accept: application/json'));
 <?php
 //sell balance update start
 $chbal1 = curl_init('https://api.hitbtc.com/api/2/trading/balance'); 
- curl_setopt($chbal1, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
+ curl_setopt($chbal1, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
  curl_setopt($chbal1, CURLOPT_RETURNTRANSFER,1);
  curl_setopt($chbal1, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 curl_setopt($chbal1, CURLOPT_HTTPHEADER, array('accept: application/json'));
@@ -70,7 +70,7 @@ $timeInForce1= "GTC";
 $ch1 = curl_init();
 //do a post
 curl_setopt($ch1,CURLOPT_URL,"https://api.hitbtc.com/api/2/order");
-curl_setopt($ch1, CURLOPT_USERPWD, 'cHxtLRjcqNVLu7_rZiORQMtbkhD-ZilR:trkn4Y8t3KxpJUVvJjoZRTnkfSnHp-5K'); // API AND KEY
+curl_setopt($ch1, CURLOPT_USERPWD, 'api_key:secret_key'); // API AND KEY
 curl_setopt($ch1, CURLOPT_POST,1);
 curl_setopt($ch1,CURLOPT_POSTFIELDS,"symbol=$symbol1&side=$side1&price=$price1&quantity=$quantity1&type=$type1&timeInForce=$timeInForce1");
 curl_setopt($ch1, CURLOPT_RETURNTRANSFER,1);
