@@ -26,7 +26,7 @@ echo $resistance['price'];
 $sql1234 = mysqli_query($connection,"TRUNCATE TABLE support");
 echo "<br>Resistance count <br>
 <table border=1><tr><td>id</td><td>Resistance</td><td>count</td></tr>";
-$sql = "SELECT id ,max, COUNT(max) tot FROM dogebtccandle group by max having count(max) > 1 order by tot desc";
+$sql = "SELECT id,max, COUNT(max) tot FROM dogebtccandle WHERE id < 10 group by max having count(max) > 1 order by tot desc";
 $result = $connection->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()){
@@ -42,10 +42,10 @@ echo "<table border=1><tr><td>id</td><td>support</td><td>count</td></tr>";
 echo "support count<br>";
 $sql1 = "SELECT id ,min, COUNT(min) total FROM dogebtccandle group by min having count(min) > 1 order by total desc";
 $result1 = $connection->query($sql1);
-if ($result->num_rows > 0) {
+if ($result1->num_rows > 0) {
     while($row1 = $result1->fetch_assoc()){
 echo "<tr><td>" . $row1["id"]. "</td><td> " . $row1["min"]. "</td><td>" . $row1["total"]. "</td><tr>";
-$inmax = mysqli_query($connection,"insert into support (type,price,count,pass) values ('min','".$row1["min"]."', '".$row1["total"]."','0')");
+$inmin = mysqli_query($connection,"insert into support (type,price,count,pass) values ('min','".$row1["min"]."', '".$row1["total"]."','0')");
 }}
 else {echo "NO count ";}
 
