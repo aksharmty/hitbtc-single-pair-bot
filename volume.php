@@ -4,13 +4,12 @@
 <?php
 define('TIMEZONE', 'Asia/kolkata');
 date_default_timezone_set(TIMEZONE);
-include "connect.php"; ?>
+include "connect.php"; 
 
 //vol check
 $sql123 = mysqli_query($connection,"TRUNCATE TABLE vol");
 
-
-$jsonFile="https://api.hitbtc.com/api/2/public/orderbook/DOGEBTC?limit=10";
+$jsonFile="https://api.hitbtc.com/api/2/public/orderbook/DOGEBTC?limit=13";
 $jsondata = file_get_contents($jsonFile);
 $data = json_decode($jsondata, true);
 
@@ -24,14 +23,14 @@ foreach ($array_data1 as $row1) {
     $svolbid = mysqli_query($connection,"INSERT INTO vol (side,price,size) VALUES ('bid','" . $row1["price"] . "', '" . $row1["size"] . "')");}
 // check vol value
 $sqlask = mysqli_fetch_array(mysqli_query($connection,"SELECT *  FROM vol where side = 'ask' order by -size limit 1"));
-$ask0 = $sqlask["price"] - '0.00000000001'; echo " - ASK D: " . $sqlask["price"]. " " . $sqlask["size"]. "<br>";
-$ask1 = number_format($ask0,11); $ask = 0;//$ask1;
+$ask0 = $sqlask["price"] - '0.00000000001'; echo " - ASK D: " . $sqlask["price"]. "<br>size : " . $sqlask["size"]. "<br>";
+$ask1 = number_format($ask0,11); $ask = $ask1;
  
-// $sqlbid = mysqli_fetch_array(mysqli_query($connection,"SELECT * FROM vol where side = 'bid' order by -size limit 1"));
-$bid0 = $sqlbid["price"] + '0.00000000030'; echo " - BID D: " . $sqlbid["price"]. " " . $sqlbid["size"]. "<br>";
+ $sqlbid = mysqli_fetch_array(mysqli_query($connection,"SELECT * FROM vol where side = 'bid' order by -size limit 1"));
+$bid0 = $sqlbid["price"] + '0.00000000030'; echo " - BID D: " . $sqlbid["price"]. "<br>size : " . $sqlbid["size"]. "<br>";
 $bid1 = number_format($bid0,11); $bid = $bid1;  
-echo "bid +50", $bid;
-echo "<br>ASK -30",$ask;
+echo "bid +30  ", $bid;
+echo "<br>ASK -1 ",$ask;
 // end vol
 ?>
 <?php
@@ -110,10 +109,10 @@ $qup1 = mysqli_fetch_array(mysqli_query($connection,"select * from trade0 where 
 $idu=$qup1['id'];
 $damount0=1;
 $damount1=$qup1['quantity'];
-if($damount1 > $damount){ $damount = $damount1; echo "damount 1",$damount1;} else { $damount = $damount0; echo "damount 0",$damount0;}
+if($damount1 > $damount0){ $damount = $damount1; echo "<br>damount1 : ",$damount1;} else { $damount = $damount0; echo "<br>damount0 : ",$damount0;}
 
 $sellprice2= $qup1['sellprice'];
-if($ask > $sellprice2){ $sellprice1 = $ask; echo "ASK SELL",$ask;} else { $sellprice1 = $sellprice2; echo "SELL",$sellprice2;}
+if($ask > $sellprice2){ $sellprice1 = $ask; echo "<br>ASK SELL",$ask;} else { $sellprice1 = $sellprice2; echo "<br>SELL",$sellprice2;}
 //echo "sellprice2 ",$sellprice2; echo "sellprice 1 ", $sellprice1;
 
 ?>
@@ -124,12 +123,12 @@ $price= "$buy";
 $price1= "$sellprice1";
 $quantityb="$bamount";
 $quantityd="$damount";
-echo "damount ",$damount;
-echo "bamount ",$bamount;
-
+echo "<br>damount ",$damount;
+echo "<br>bamount ",$bamount;
+if($price > 0.00000024){
 if ($buy < 0.00000030){echo "<br>sellprice less then 30";
  if ($available > $lastbal or $waitdown > $buy) {
-    echo "buy normal";
+    echo "<br>buy normal";
     if($available > $btclow){
     $ch = curl_init();
 //do a post
@@ -164,10 +163,10 @@ $query = mysqli_query($connection,"INSERT INTO trade0(price,sellprice,quantity,d
 //buy end 
 
 }
-}else{echo "btc low";}
+}else{echo "<br>btc low";}
 ////////
 if ($available > $btclow & $waitup < $buy) {
-    echo "buy high";
+    echo "<br>buy high";
     $ch = curl_init();
 //do a post
 curl_setopt($ch,CURLOPT_URL,$orderurl);
@@ -201,15 +200,15 @@ $query = mysqli_query($connection,"INSERT INTO trade0(price,sellprice,quantity,d
 //buy end 
 
 }
-else{echo "btc low on high buy";}
+else{echo "<br>btc low on high buy";}
     
 }
-}else { echo " no buy";}
+}else { echo "<br> no buy";}
 
     
     
-} else {echo "sellprice more then 30";}
-
+} else {echo "<br>sellprice more then 30";}
+} else {echo "buy price wrong";}
 if ($dbal >= $damount){
 //sell start
 echo "sell";
@@ -244,7 +243,7 @@ $querysellup = mysqli_query($connection,"update trade0 set type ='1' , sell ='$p
 
 }
 }else {echo "sell price wrong";}
-} else {echo "DOGE bal 0";}
+} else {echo "<br>DOGE bal 0";}
 ?>
 <?php 
 $dd =mysqli_query($connection, " delete from trade1 where price = ''") ; ?>
